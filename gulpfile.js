@@ -3,6 +3,7 @@ const nodemon = require('gulp-nodemon');
 const Promise = require('bluebird');
 const sequelize_fixtures = require('sequelize-fixtures');
 const env = require('gulp-env');
+var    exec = require('child_process').exec;
 
 env({
   file: './.env',
@@ -54,3 +55,30 @@ gulp.task('watch', function() {
 });
 
 gulp.task('default', ['nodemon', 'watch']);
+//
+// gulp.task("webpack-dev-server", function(callback) {
+//   // Start a webpack-dev-server
+//   var compiler = webpack({
+//     // configuration
+//   });
+//
+//   new WebpackDevServer(compiler, {
+//     // server and middleware options
+//   }).listen(8080, "localhost", function(err) {
+//     if(err) throw new gutil.PluginError("webpack-dev-server", err);
+//     // Server listening
+//     gutil.log("[webpack-dev-server]", "http://localhost:8080/webpack-dev-server/index.html");
+//
+//     // keep the server alive or continue?
+//     // callback();
+//   });
+// });
+
+gulp.task('node', function (cb) {
+  exec('node server/index.js', function (err, stdout, stderr) {
+    console.log(stdout);
+    console.log(stderr);
+    cb(err);
+  });
+
+})

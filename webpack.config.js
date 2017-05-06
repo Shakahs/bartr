@@ -9,12 +9,15 @@ module.exports = {
   entry: {
     'app': [
       'react-hot-loader/patch',
+      'webpack/hot/dev-server',
+      'webpack-hot-middleware/client',
       './client/src/index'
     ]
   },
   output: {
     filename: 'bundle.js',
-    path: BUILD_DIR
+    path: '/',
+    publicPath: 'http://localhost:5000/assets/'
   },
   module: {
     rules: [
@@ -33,14 +36,17 @@ module.exports = {
     }
     ]
   },
+  target: 'web',
   devServer: {
     contentBase: "./client/static",
-    publicPath: "/",
+    publicPath: "http://localhost:5000/assets/",
     hot: true,
-    inline: true
+    inline: true,
+    // port: 5050
   },
-  devtool: 'sourcemap',
+  devtool: 'source-map',
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
+    // new webpack.NoErrorsPlugin()
   ]
 };

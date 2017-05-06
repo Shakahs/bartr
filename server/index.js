@@ -4,7 +4,17 @@ const expressSession = require('express-session');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 
+var webpack = require('webpack');
+var webpackConfig = require('../webpack.config');
+var compiler = webpack(webpackConfig);
+
+
 const app = express();
+app.use(require("webpack-dev-middleware")(compiler, {
+  noInfo: true, publicPath: webpackConfig.output.publicPath
+}));
+app.use(require("webpack-hot-middleware")(compiler));
+
 
 //for dev testing
 app.all('/*', function(req, res, next) {
@@ -16,7 +26,7 @@ app.all('/*', function(req, res, next) {
 app.use(morgan());
 // app.use(expressSession({secret: 'bigboost'}));
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, '../client/build')));
+app.use(express.static(path.join(__dirname, '../client/static')));
 
 const router = require('./router');
 

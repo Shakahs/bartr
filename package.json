@@ -42,7 +42,9 @@
     "sequelize-fixtures": "^0.5.6",
     "sqlite3": "^3.1.8",
     "webpack": "^2.5.0",
-    "webpack-dev-server": "^2.4.5"
+    "webpack-dev-middleware": "^1.10.2",
+    "webpack-dev-server": "^2.4.5",
+    "webpack-hot-middleware": "^2.18.0"
   },
   "dependencies": {
     "auth0": "^2.6.0",
