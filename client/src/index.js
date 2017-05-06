@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Routing from './bartr';
 import { AppContainer } from 'react-hot-loader'
-
+// import createStoreWithMiddleware from './store';
 
 // if (module.hot) {
 //   console.log('try hot reload')
@@ -22,15 +22,26 @@ ReactDOM.render(
 );
 
 
-// Hot Module Replacement API
+// // Hot Module Replacement API
+// if (module.hot) {
+//   module.hot.accept('./bartr', () => {
+//     const NextApp = require('./bartr').default;
+//     ReactDOM.render(
+//       <AppContainer>
+//         <Routing/>
+//       </AppContainer>,
+//       document.getElementById('app')
+//     );
+//   });
+// }
+
 if (module.hot) {
-  module.hot.accept('./bartr', () => {
-    const NextApp = require('./bartr').default;
-    ReactDOM.render(
-      <AppContainer>
-        <Routing/>
-      </AppContainer>,
-      document.getElementById('app')
-    );
+  module.hot.accept();
+
+  // fix hot module replacement for reducers
+  module.hot.accept('./store', () => {
+    const store = require('./store');
+
+    store.replaceReducer(store);
   });
 }

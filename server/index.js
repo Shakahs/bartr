@@ -11,9 +11,9 @@ var compiler = webpack(webpackConfig);
 
 const app = express();
 app.use(require("webpack-dev-middleware")(compiler, {
-  noInfo: true, publicPath: webpackConfig.output.publicPath
+  noInfo: false, publicPath: webpackConfig.output.publicPath
 }));
-app.use(require("webpack-hot-middleware")(compiler));
+app.use(require("webpack-hot-middleware")(compiler, {log: console.log}));
 
 
 //for dev testing

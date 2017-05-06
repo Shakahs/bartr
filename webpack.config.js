@@ -44,7 +44,7 @@ module.exports = {
     inline: true,
     // port: 5050
   },
-  devtool: 'source-map',
+  devtool: 'sourcemap',
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     // new webpack.NoErrorsPlugin()
